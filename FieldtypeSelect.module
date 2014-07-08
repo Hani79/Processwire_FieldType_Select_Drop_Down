@@ -50,13 +50,8 @@ class FieldtypeSelect extends Fieldtype {
 	  $options = explode("\n",$field->select_options);
 	  foreach($options as $option) {
 	       $valueLabel = explode(':=',$option);
-	       if (count($valueLabel) == 1) { // if option/label pair *not* provided
-		    $value = trim($valueLabel[0]);
-		    $label = NULL;
-	       } else if (count($valueLabel) == 2){ // if option/label pair provided
-		    $value = trim($valueLabel[0]);
-		    $label = trim($valueLabel[1]);
-	       }
+	       $value = trim($valueLabel[0]);
+	       $label = isset($valueLabel[1]) ? trim($valueLabel[1]) : $value;
 	       if ($value != '' && ($label != '' || $label == NULL)) {
 		    if(!strlen($value)) continue;
 		    $inputfield->addOption((string) trim($value),(string) trim($label));
